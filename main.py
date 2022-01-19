@@ -1,29 +1,36 @@
 import os
 
-from investing_algorithm_framework import App, TimeUnit, AlgorithmContext, \
+from investing_algorithm_framework import TimeUnit, AlgorithmContext, \
     TradingDataTypes
-from investing_algorithm_framework.configuration.constants import BINANCE, \
-    BINANCE_API_KEY, BINANCE_SECRET_KEY, TRADING_SYMBOL
-from initializer import EltyerInitializer as Initializer
-from order_executor import EltyerOrderExecutor as OrderExecutor
-from portfolio_manager import EltyerPortfolioManager as PortfolioManager
-from configuration.constants import ELTYER_API_KEY
+from investing_algorithm_framework.configuration.constants import BINANCE
+
+from setup import create_app
+
 dir_path = os.path.abspath(os.path.join(os.path.realpath(__file__), os.pardir))
 
-# Create an application (manages your algorithm, rest api, etc...)
-app = App(
+app = create_app(
     resources_directory=dir_path,
-    config={
-        BINANCE_API_KEY: "<BINANCE_API_KEY>",
-        BINANCE_SECRET_KEY: "<BINANCE_SECRET_KEY>",
-        TRADING_SYMBOL: "USDT",
-        ELTYER_API_KEY: "<ELTYER_API_KEY>"
-    }
 )
 
-app.algorithm.add_initializer(Initializer)
-app.algorithm.add_order_executor(OrderExecutor)
-app.algorithm.add_portfolio_manager(PortfolioManager)
+
+@app.algorithm.strategy(
+    time_unit=TimeUnit.SECONDS,
+    interval=5,
+    data_provider_identifier=BINANCE,
+    target_symbol="BTC",
+    trading_data_type=TradingDataTypes.TICKER,
+)
+def perform_strategy(context: AlgorithmContext, ticker):
+    # order = context.create_limit_buy_order(
+    #     symbol="BTC",
+    #     price=10,
+    #     amount=1,
+    #     execute=True,
+    # )
+    portfolio = context.get_portfolio()
+    print(context.get_orders())
+    print(context.get_positions())
+
 
 if __name__ == "__main__":
     app.start()

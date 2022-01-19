@@ -9,18 +9,27 @@ logger = logging.getLogger(__name__)
 
 
 class EltyerOrderExecutor(OrderExecutor):
+    identifier = "ELTYER"
 
     def execute_limit_order(self, order: Order, algorithm_context,
                             **kwargs) -> bool:
+        print("executing limit order")
         client: Client = algorithm_context.config[ELTYER_CLIENT]
         try:
-            eltyer_order = client.create_limit_order(
-                target_symbol=order.target_symbol,
-                amount=order.amount_target_symbol,
-                side=order.order_side,
-                price=order.initial_price
-            )
-            order.order_reference = eltyer_order.id
+
+            try:
+                eltyer_order = client.create_limit_order(
+                    target_symbol=order.target_symbol,
+                    amount=order.amount_target_symbol,
+                    side=order.order_side,
+                    price=order.initial_price
+                )
+            except ClientException as e:
+                logger.error(e)
+                raise OperationalException(e)
+
+            # print(eltyer_order.id)
+            # order.order_reference = eltyer_order.id
             return True
         except ClientException as e:
             logger.exception(e)
