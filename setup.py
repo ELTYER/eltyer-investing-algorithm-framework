@@ -1,5 +1,5 @@
 import setuptools
-from eltyer import get_version
+from eltyer_investing_algorithm_framework import get_version
 
 VERSION = get_version()
 
