@@ -1,2 +1,2 @@
-investing-algorithm-framework>=0.15.1
+investing-algorithm-framework>=0.16.2
 eltyer>=0.2
