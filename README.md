@@ -3,8 +3,6 @@ This is the official plugin for the [investing algorithm framework](https://inve
 
 ## Installation
 You can install the plugin with pip.
-
-You can install the python client with pip.
 ```shell
 pip install eltyer-investing-algorithm-framework
 ```
@@ -18,7 +16,7 @@ from investing_algorithm_framework import TimeUnit, AlgorithmContext, \
     TradingDataTypes
 from investing_algorithm_framework.configuration.constants import BINANCE
 
-from setup import create_app
+from eltyer_investing_algorithm_framework.setup import create_app
 
 dir_path = os.path.abspath(os.path.join(os.path.realpath(__file__), os.pardir))
 
