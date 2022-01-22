@@ -1,3 +1,4 @@
+from eltyer_investing_algorithm_framework.configuration import constants
 from eltyer_investing_algorithm_framework.setup import create_app
 from eltyer_investing_algorithm_framework.utils.version import get_version
 from eltyer_investing_algorithm_framework.initializer \
@@ -15,5 +16,6 @@ __all__ = [
     "create_app",
     "Initializer",
     "PortfolioManager",
-    "OrderExecutor"
+    "OrderExecutor",
+    "constants"
 ]
