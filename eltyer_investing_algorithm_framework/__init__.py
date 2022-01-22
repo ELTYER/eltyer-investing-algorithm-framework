@@ -8,7 +8,7 @@ from eltyer_investing_algorithm_framework.portfolio_manager \
 from eltyer_investing_algorithm_framework.order_executor \
     import EltyerOrderExecutor as OrderExecutor
 
-VERSION = (0, 4, 0, 'alpha', 0)
+VERSION = (0, 4, 1, 'alpha', 0)
 
 
 __all__ = [
