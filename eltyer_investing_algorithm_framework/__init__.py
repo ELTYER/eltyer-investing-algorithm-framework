@@ -1,6 +1,5 @@
 from eltyer_investing_algorithm_framework.setup import create_app
 from eltyer_investing_algorithm_framework.utils.version import get_version
-
 from eltyer_investing_algorithm_framework.initializer \
     import EltyerInitializer as Initializer
 from eltyer_investing_algorithm_framework.portfolio_manager \
@@ -8,7 +7,7 @@ from eltyer_investing_algorithm_framework.portfolio_manager \
 from eltyer_investing_algorithm_framework.order_executor \
     import EltyerOrderExecutor as OrderExecutor
 
-VERSION = (0, 2, 0, 'alpha', 0)
+VERSION = (0, 4, 0, 'alpha', 0)
 
 
 __all__ = [
