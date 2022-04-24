@@ -8,15 +8,10 @@ from eltyer_investing_algorithm_framework.portfolio_manager import \
     EltyerPortfolioManager
 
 
-def create_app(resources_directory, config={}, trading_bot_api_key=None):
-    app = App(
-        resources_directory=resources_directory,
-        config=config
-    )
+def create_app(resource_directory, config={}, key=None):
+    config[constants.ELTYER_API_KEY] = key
 
-    if trading_bot_api_key is not None:
-        app.config[constants.ELTYER_API_KEY] = trading_bot_api_key
-
+    app = App(resource_directory=resource_directory, config=config)
     app.add_initializer(EltyerInitializer)
     app.add_order_executor(EltyerOrderExecutor)
     app.add_portfolio_manager(EltyerPortfolioManager)

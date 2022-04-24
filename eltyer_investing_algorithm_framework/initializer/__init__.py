@@ -22,4 +22,4 @@ class EltyerInitializer(AlgorithmContextInitializer):
                 "Could not retrieve algorithm environment from ELTYER"
             )
 
-        algorithm.config.set(constants.ELTYER_CLIENT, client)
+        algorithm.config.add(constants.ELTYER_CLIENT, client)
