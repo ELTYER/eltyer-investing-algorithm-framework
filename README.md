@@ -18,7 +18,7 @@ from eltyer_investing_algorithm_framework.setup import create_app
 dir_path = os.path.abspath(os.path.join(os.path.realpath(__file__), os.pardir))
 
 app = create_app(
-    resources_directory=dir_path, key="<YOUR_ELTYER_TRADING_BOT_API_KEY>"
+    resource_directory=dir_path, key="<YOUR_ELTYER_TRADING_BOT_API_KEY>"
 )
 
 
