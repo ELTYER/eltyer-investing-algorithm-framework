@@ -12,26 +12,22 @@ Example trading bot using binance data using the eltyer components.
 ```python
 import os
 
-from investing_algorithm_framework import TimeUnit, AlgorithmContext, \
-    TradingDataTypes
-from investing_algorithm_framework.configuration.constants import BINANCE
-
+from investing_algorithm_framework import AlgorithmContext
 from eltyer_investing_algorithm_framework.setup import create_app
 
 dir_path = os.path.abspath(os.path.join(os.path.realpath(__file__), os.pardir))
 
 app = create_app(
-    resources_directory=dir_path,
-    trading_bot_api_key="<YOUR_ELTYER_TRADING_BOT_API_KEY>"
+    resources_directory=dir_path, key="<YOUR_ELTYER_TRADING_BOT_API_KEY>"
 )
 
 
 @app.algorithm.strategy(
-    time_unit=TimeUnit.SECONDS,
+    time_unit="SECOND",
     interval=5,
-    data_provider_identifier=BINANCE,
+    data_provider_identifier="BINANCE",
     target_symbol="BTC",
-    trading_data_type=TradingDataTypes.TICKER,
+    trading_data_type="TICKER",
 )
 def perform_strategy(context: AlgorithmContext, ticker):
     print("Running my strategy")

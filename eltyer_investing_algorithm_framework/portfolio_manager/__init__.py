@@ -19,9 +19,6 @@ class EltyerPortfolioManager(PortfolioManager):
         portfolio = self.client.get_portfolio()
         self.market = portfolio.broker
         self.trading_symbol = portfolio.trading_symbol
-
-        algorithm_context.config\
-            .set("TRADING_SYMBOL", portfolio.trading_symbol)
         super(EltyerPortfolioManager, self).initialize(algorithm_context)
 
     def get_positions(
@@ -29,6 +26,7 @@ class EltyerPortfolioManager(PortfolioManager):
     ) -> List[Position]:
         positions_data = self.client.get_positions(json=True)
         positions = []
+        print(positions_data)
 
         for position_data in positions_data:
             positions.append(Position.from_dict(position_data))

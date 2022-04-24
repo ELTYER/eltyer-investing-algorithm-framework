@@ -12,7 +12,6 @@ logger = logging.getLogger(__name__)
 class EltyerInitializer(AlgorithmContextInitializer):
 
     def initialize(self, algorithm: AlgorithmContext) -> None:
-        print("initializing")
         client = Client()
         client.config.API_KEY = algorithm.config.get(constants.ELTYER_API_KEY)
         client.start()
@@ -23,5 +22,4 @@ class EltyerInitializer(AlgorithmContextInitializer):
                 "Could not retrieve algorithm environment from ELTYER"
             )
 
-        algorithm.config.set(constants.ELTYER_CLIENT, client)
-        print(algorithm.config)
+        algorithm.config.add(constants.ELTYER_CLIENT, client)
