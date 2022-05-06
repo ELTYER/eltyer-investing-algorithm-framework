@@ -26,7 +26,6 @@ class EltyerPortfolioManager(PortfolioManager):
     ) -> List[Position]:
         positions_data = self.client.get_positions(json=True)
         positions = []
-        print(positions_data)
 
         for position_data in positions_data:
             positions.append(Position.from_dict(position_data))
