@@ -5,6 +5,8 @@ from investing_algorithm_framework.core.workers import Strategy
 from investing_algorithm_framework import TradingDataTypes, TradingTimeUnit, \
     AlgorithmContext
 from eltyer_investing_algorithm_framework import create_app
+from eltyer_investing_algorithm_framework.configuration.constants \
+    import ELTYER_CLIENT
 
 
 class StrategyOne(Strategy):
@@ -110,12 +112,20 @@ class Test(TestCase):
         response = self.app.start(
             stateless=True, payload={"action": "CHECK_ONLINE"}
         )
+        self.assertTrue(self.app.config.get_stateless())
+
+        client = self.app.algorithm.config.get(ELTYER_CLIENT)
+
+        self.assertIsNone(client.status)
         self.assertEqual(response["statusCode"], 200)
 
         response = self.app.start(
             stateless=True, payload={"ACTION": "CHECK_ONLINE"}
         )
         self.assertEqual(response["statusCode"], 200)
+        client = self.app.algorithm.config.get(ELTYER_CLIENT)
+
+        self.assertIsNone(client.status)
 
     def test_stateless_run_strategy(self):
         self.app.algorithm.add_strategy(StrategyOne)
